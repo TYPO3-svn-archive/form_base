@@ -1,0 +1,244 @@
+plugin.tx_formbase {
+	settings {
+		yamlPersistenceManager {
+			savePath = %FLOW3_PATH_DATA%Forms/
+		}
+		supertypeResolver {
+			hiddenProperties {
+			}
+		}
+		presets {
+			default {
+				title = Default
+				stylesheets {
+				}
+				javaScripts {
+				}
+				formElementTypes {
+					Tx_FormBase_Base {
+						renderingOptions {
+							templatePathPattern = EXT:form_base/Resources/Private/Form/{@type}.html
+							partialPathPattern = EXT:form_base/Resources/Private/Form/Partials/{@type}.html
+							layoutPathPattern = EXT:form_base/Resources/Private/Form/Layouts/{@type}.html
+						}
+					}
+					Tx_FormBase_Form {
+						superTypes {
+							0 = Tx_FormBase_Base
+						}
+						rendererClassName = Tx_FormBase_Core_Renderer_FluidFormRenderer
+						renderingOptions {
+							renderableNameInTemplate = form
+						}
+					}
+					Tx_FormBase_RemovableMixin {
+					}
+					Tx_FormBase_ReadOnlyFormElement {
+						superTypes {
+							0 = Tx_FormBase_Base
+							1 = Tx_FormBase_RemovableMixin
+						}
+						implementationClassName = Tx_FormBase_FormElements_GenericFormElement
+						renderingOptions {
+							renderableNameInTemplate = element
+						}
+					}
+					Tx_FormBase_FormElement {
+						superTypes {
+							0 = Tx_FormBase_Base
+							1 = Tx_FormBase_RemovableMixin
+						}
+						implementationClassName = Tx_FormBase_FormElements_GenericFormElement
+						renderingOptions {
+							renderableNameInTemplate = element
+						}
+					}
+					Tx_FormBase_Page {
+						superTypes {
+							0 = Tx_FormBase_Base
+							1 = Tx_FormBase_RemovableMixin
+						}
+						implementationClassName = Tx_FormBase_Core_Model_Page
+						renderingOptions {
+							renderableNameInTemplate = page
+						}
+					}
+					Tx_FormBase_PreviewPage {
+						superTypes {
+							0 = Tx_FormBase_Page
+						}
+					}
+					Tx_FormBase_Section {
+						superTypes {
+							0 = Tx_FormBase_FormElement
+						}
+						implementationClassName = Tx_FormBase_FormElements_Section
+						renderingOptions {
+							renderableNameInTemplate = section
+						}
+					}
+					Tx_FormBase_TextMixin {
+					}
+					Tx_FormBase_SingleLineText {
+						superTypes {
+							0 = Tx_FormBase_FormElement
+							1 = Tx_FormBase_TextMixin
+						}
+					}
+					Tx_FormBase_Password {
+						superTypes {
+							0 = Tx_FormBase_FormElement
+							1 = Tx_FormBase_TextMixin
+						}
+					}
+					Tx_FormBase_MultiLineText {
+						superTypes {
+							0 = Tx_FormBase_FormElement
+							1 = Tx_FormBase_TextMixin
+						}
+					}
+					Tx_FormBase_SelectionMixin {
+					}
+					Tx_FormBase_SingleSelectionMixin {
+						superTypes {
+							0 = Tx_FormBase_SelectionMixin
+						}
+					}
+					Tx_FormBase_MultiSelectionMixin {
+						superTypes {
+							0 = Tx_FormBase_SelectionMixin
+						}
+					}
+					Tx_FormBase_Checkbox {
+						superTypes {
+							0 = Tx_FormBase_FormElement
+						}
+						properties {
+							value = 1
+						}
+					}
+					Tx_FormBase_MultipleSelectCheckboxes {
+						superTypes {
+							0 = Tx_FormBase_FormElement
+							1 = Tx_FormBase_MultiSelectionMixin
+						}
+					}
+					Tx_FormBase_MultipleSelectDropdown {
+						superTypes {
+							0 = Tx_FormBase_FormElement
+							1 = Tx_FormBase_MultiSelectionMixin
+						}
+					}
+					Tx_FormBase_SingleSelectRadiobuttons {
+						superTypes {
+							0 = Tx_FormBase_FormElement
+							1 = Tx_FormBase_SingleSelectionMixin
+						}
+					}
+					Tx_FormBase_SingleSelectDropdown {
+						superTypes {
+							0 = Tx_FormBase_FormElement
+							1 = Tx_FormBase_SingleSelectionMixin
+						}
+					}
+					Tx_FormBase_DatePicker {
+						superTypes {
+							0 = Tx_FormBase_FormElement
+						}
+						implementationClassName = Tx_FormBase_FormElements_DatePicker
+						properties {
+							dateFormat = Y-m-d
+							enableDatePicker = 1
+							displayTimeSelector = 
+						}
+					}
+					Tx_FormBase_FileUpload {
+						superTypes {
+							0 = Tx_FormBase_FormElement
+						}
+						implementationClassName = Tx_FormBase_FormElements_FileUpload
+						properties {
+							allowedExtensions {
+								0 = pdf
+								1 = doc
+							}
+						}
+					}
+					Tx_FormBase_ImageUpload {
+						superTypes {
+							0 = Tx_FormBase_FormElement
+						}
+						implementationClassName = Tx_FormBase_FormElements_ImageUpload
+						properties {
+							allowedTypes {
+								0 = jpeg
+								1 = png
+								2 = bmp
+							}
+						}
+					}
+					Tx_FormBase_StaticText {
+						superTypes {
+							0 = Tx_FormBase_ReadOnlyFormElement
+						}
+						properties {
+							text = 
+						}
+					}
+				}
+				finisherPresets {
+					Tx_FormBase_Redirect {
+						implementationClassName = Tx_FormBase_Finishers_RedirectFinisher
+						options {
+						}
+					}
+					Tx_FormBase_Email {
+						implementationClassName = Tx_FormBase_Finishers_EmailFinisher
+						options {
+						}
+					}
+					Tx_FormBase_Confirmation {
+						implementationClassName = Tx_FormBase_Finishers_ConfirmationFinisher
+						options {
+						}
+					}
+				}
+				validatorPresets {
+					NotEmpty {
+						implementationClassName = Tx_Extbase_Validation_Validator_NotEmptyValidator
+					}
+					DateTimeRange {
+						implementationClassName = Tx_Extbase_Validation_Validator_DateTimeValidator
+					}
+					Alphanumeric {
+						implementationClassName = Tx_Extbase_Validation_Validator_AlphanumericValidator
+					}
+					Text {
+						implementationClassName = Tx_Extbase_Validation_Validator_TextValidator
+					}
+					StringLength {
+						implementationClassName = Tx_Extbase_Validation_Validator_StringLengthValidator
+					}
+					EmailAddress {
+						implementationClassName = Tx_Extbase_Validation_Validator_EmailAddressValidator
+					}
+					Integer {
+						implementationClassName = Tx_Extbase_Validation_Validator_IntegerValidator
+					}
+					Float {
+						implementationClassName = Tx_Extbase_Validation_Validator_FloatValidator
+					}
+					NumberRange {
+						implementationClassName = Tx_Extbase_Validation_Validator_NumberRangeValidator
+					}
+					RegularExpression {
+						implementationClassName = Tx_Extbase_Validation_Validator_RegularExpressionValidator
+					}
+					Count {
+						implementationClassName = Tx_FormBase_Validation_Validator_CountValidator
+					}
+				}
+			}
+		}
+	}
+}
