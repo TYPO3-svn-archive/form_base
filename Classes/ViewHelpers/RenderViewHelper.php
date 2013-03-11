@@ -49,12 +49,13 @@ class Tx_FormBase_ViewHelpers_RenderViewHelper extends Tx_Fluid_Core_ViewHelper_
 	 */
 	public function render($persistenceIdentifier = NULL, $factoryClass = 'Tx_FormBase_Factory_ArrayFormFactory', $presetName = 'default', array $overrideConfiguration = array()) {
 		if (isset($persistenceIdentifier)) {
-			$overrideConfiguration = Tx_Extbase_Utility_Arrays::arrayMergeRecursiveOverrule($this->formPersistenceManager->load($persistenceIdentifier), $overrideConfiguration);
+			$overrideConfiguration = Tx_FormBase_Utility_Arrays::arrayMergeRecursiveOverrule($this->formPersistenceManager->load($persistenceIdentifier), $overrideConfiguration);
 		}
-
+		
 		$factory = $this->objectManager->get($factoryClass);
 		$formDefinition = $factory->build($overrideConfiguration, $presetName);
-		$response = new Tx_Extbase_MVC_Response($this->controllerContext->getResponse());
+		
+		$response = new Tx_Extbase_MVC_Web_Response($this->controllerContext->getResponse());
 		$form = $formDefinition->bind($this->controllerContext->getRequest(), $response);
 		return $form->render();
 	}

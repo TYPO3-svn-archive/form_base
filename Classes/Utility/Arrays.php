@@ -23,12 +23,12 @@ class Tx_FormBase_Utility_Arrays implements t3lib_Singleton {
 	 *
 	 * @param array $arrayToTest
 	 * @param array $allowedArrayKeys
-	 * @throws Tx_Flow3FormApi_Exception_TypeDefinitionNotValidException if an element in $arrayToTest is not in $allowedArrayKeys
+	 * @throws Tx_FormBase_Exception_TypeDefinitionNotValidException if an element in $arrayToTest is not in $allowedArrayKeys
 	 */
 	public static function assertAllArrayKeysAreValid(array $arrayToTest, array $allowedArrayKeys) {
 		$notAllowedArrayKeys = array_keys(array_diff_key($arrayToTest, array_flip($allowedArrayKeys)));
 		if (count($notAllowedArrayKeys) !== 0) {
-			throw new Tx_Flow3FormApi_Exception_TypeDefinitionNotValidException(sprintf('The options "%s" were not allowed (allowed were: "%s")', implode(', ', $notAllowedArrayKeys), implode(', ', $allowedArrayKeys)), 1325697085);
+			throw new Tx_FormBase_Exception_TypeDefinitionNotValidException(sprintf('The options "%s" were not allowed (allowed were: "%s")', implode(', ', $notAllowedArrayKeys), implode(', ', $allowedArrayKeys)), 1325697085);
 		}
 	}
 

@@ -30,7 +30,7 @@
  * @package form_base
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_FormBase_Validation_ConjunctionValidatorAbc extends Tx_Extbase_Validation_Validator_ConjunctionValidator {
+class Tx_FormBase_Validation_ConjunctionValidator extends Tx_Extbase_Validation_Validator_ConjunctionValidator {
 
 	/**
 	 * Returns the ConjunctionValidator's sub validators

@@ -30,7 +30,7 @@ class Tx_FormBase_ViewHelpers_Form_TimePickerViewHelper extends Tx_Fluid_ViewHel
 	protected $tagName = 'select';
 
 	/**
-	 * @var Tx_FormBase_Property_PropertyMapper
+	 * @var Tx_Extbase_Property_PropertyMapper
 	 * @inject
 	 */
 	protected $propertyMapper;

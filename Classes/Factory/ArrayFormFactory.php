@@ -43,7 +43,7 @@ class Tx_FormBase_Factory_ArrayFormFactory extends Tx_FormBase_Factory_AbstractF
 
 	protected function addNestedRenderable($nestedRenderableConfiguration, Tx_FormBase_Core_Model_Renderable_CompositeRenderableInterface $parentRenderable) {
 		if (!isset($nestedRenderableConfiguration['identifier'])) {
-			throw $this->objectManager->create('Tx_FormBase_Exception_IdentifierNotValidException','Identifier not set.', 1329289436);
+			throw new Tx_FormBase_Exception_IdentifierNotValidException('Identifier not set.', 1329289436);
 		}
 		if ($parentRenderable instanceof Tx_FormBase_Core_Model_FormDefinition) {
 			$renderable = $parentRenderable->createPage($nestedRenderableConfiguration['identifier'], $nestedRenderableConfiguration['type']);

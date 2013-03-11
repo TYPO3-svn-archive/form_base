@@ -53,10 +53,10 @@ class Tx_FormBase_Utility_SupertypeResolver {
 			$mergedTypeDefinition = array();
 			if (isset($this->configuration[$type]['superTypes'])) {
 				foreach ($this->configuration[$type]['superTypes'] as $superType) {
-					$mergedTypeDefinition = Tx_Extbase_Utility_Arrays::arrayMergeRecursiveOverrule($mergedTypeDefinition, $this->getMergedTypeDefinition($superType, $showHiddenProperties));
+					$mergedTypeDefinition = Tx_FormBase_Utility_Arrays::arrayMergeRecursiveOverrule($mergedTypeDefinition, $this->getMergedTypeDefinition($superType, $showHiddenProperties));
 				}
 			}
-			$mergedTypeDefinition = Tx_Extbase_Utility_Arrays::arrayMergeRecursiveOverrule($mergedTypeDefinition, $this->configuration[$type]);
+			$mergedTypeDefinition = Tx_FormBase_Utility_Arrays::arrayMergeRecursiveOverrule($mergedTypeDefinition, $this->configuration[$type]);
 			unset($mergedTypeDefinition['superTypes']);
 
 			if ($showHiddenProperties === FALSE && isset($this->settings['supertypeResolver']['hiddenProperties']) && is_array($this->settings['supertypeResolver']['hiddenProperties'])) {

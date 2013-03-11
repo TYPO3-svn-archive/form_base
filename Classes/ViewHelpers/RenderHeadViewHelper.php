@@ -15,14 +15,6 @@
  * Output the configured stylesheets and JavaScript include tags for a given preset
  */
 class Tx_FormBase_ViewHelpers_RenderHeadViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
-					
-	/**
-	 * The Extbase object manager
-	 * 
-	 * @var Tx_Extbase_Object_ObjectManager
-	 * @inject
-	 */
-	protected $objectManager;
 
 	/**
 	 * @inject
@@ -63,7 +55,7 @@ class Tx_FormBase_ViewHelpers_RenderHeadViewHelper extends Tx_Fluid_Core_ViewHel
 		$matches = array();
 		preg_match('#resource://([^/]*)/Public/(.*)#', $resourcePath, $matches);
 		if ($matches === array()) {
-			throw $this->objectManager->create('Tx_FormBase_Core_ViewHelper_Exception','Resource path "' . $resourcePath . '" can\'t be resolved.', 1328543327);
+			throw new Tx_FormBase_Core_ViewHelper_Exception('Resource path "' . $resourcePath . '" can\'t be resolved.', 1328543327);
 		}
 		$package = $matches[1];
 		$path = $matches[2];

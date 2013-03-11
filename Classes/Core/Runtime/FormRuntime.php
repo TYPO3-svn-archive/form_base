@@ -67,13 +67,13 @@ class Tx_FormBase_Core_Runtime_FormRuntime implements Tx_FormBase_Core_Model_Ren
 	protected $formDefinition;
 
 	/**
-	 * @var Tx_Extbase_MVC_Request
+	 * @var Tx_Extbase_MVC_Web_Request
 	 * @internal
 	 */
 	protected $request;
 
 	/**
-	 * @var Tx_Extbase_MVC_Response
+	 * @var Tx_Extbase_MVC_Web_Response
 	 * @internal
 	 */
 	protected $response;
@@ -124,12 +124,12 @@ class Tx_FormBase_Core_Runtime_FormRuntime implements Tx_FormBase_Core_Model_Ren
 
 	/**
 	 * @param Tx_FormBase_Core_Model_FormDefinition $formDefinition
-	 * @param Tx_Extbase_MVC_Request $request
-	 * @param Tx_Extbase_MVC_Response $response
+	 * @param Tx_Extbase_MVC_Web_Request $request
+	 * @param Tx_Extbase_MVC_Web_Response $response
 	 * @throws Tx_FormBase_Exception_IdentifierNotValidException
 	 * @internal
 	 */
-	public function __construct(Tx_FormBase_Core_Model_FormDefinition $formDefinition, Tx_Extbase_MVC_Request $request, Tx_Extbase_MVC_Response $response) {
+	public function __construct(Tx_FormBase_Core_Model_FormDefinition $formDefinition, Tx_Extbase_MVC_Web_Request $request, Tx_Extbase_MVC_Web_Response $response) {
 		$this->formDefinition = $formDefinition;
 		$this->request = $request;
 		$this->response = $response;
@@ -258,7 +258,7 @@ class Tx_FormBase_Core_Runtime_FormRuntime implements Tx_FormBase_Core_Model_Ren
 		};
 
 		foreach ($page->getElementsRecursively() as $element) {
-			$value = Tx_Extbase_Utility_Arrays::getValueByPath($requestArguments, $element->getIdentifier());
+			$value = Tx_FormBase_Utility_Arrays::getValueByPath($requestArguments, $element->getIdentifier());
 			$element->onSubmit($this, $value);
 
 			$this->formState->setFormValue($element->getIdentifier(), $value);
@@ -323,7 +323,6 @@ class Tx_FormBase_Core_Runtime_FormRuntime implements Tx_FormBase_Core_Model_Ren
 		$renderer->setControllerContext($controllerContext);
 
 		$renderer->setFormRuntime($this);
-
 		return $renderer->renderRenderable($this);
 	}
 
@@ -357,7 +356,7 @@ class Tx_FormBase_Core_Runtime_FormRuntime implements Tx_FormBase_Core_Model_Ren
 	 * This is mostly relevant inside Finishers, where you f.e. want to redirect
 	 * the user to another page.
 	 *
-	 * @return Tx_Extbase_MVC_Request the request this object is bound to
+	 * @return Tx_Extbase_MVC_Web_Request the request this object is bound to
 	 * @api
 	 */
 	public function getRequest() {
@@ -370,7 +369,7 @@ class Tx_FormBase_Core_Runtime_FormRuntime implements Tx_FormBase_Core_Model_Ren
 	 * This is mostly relevant inside Finishers, where you f.e. want to set response
 	 * headers or output content.
 	 *
-	 * @return Tx_Extbase_MVC_Response the response this object is bound to
+	 * @return Tx_Extbase_MVC_Web_Response the response this object is bound to
 	 * @api
 	 */
 	public function getResponse() {
@@ -419,6 +418,7 @@ class Tx_FormBase_Core_Runtime_FormRuntime implements Tx_FormBase_Core_Model_Ren
 	 */
 	protected function getControllerContext() {
 		$uriBuilder = $this->objectManager->get('Tx_Extbase_MVC_Web_Routing_UriBuilder');
+		$uriBuilder->setRequest($this->request);
 		$controllerContext = $this->objectManager->create('Tx_Extbase_MVC_Controller_ControllerContext');
 		$controllerContext->setRequest($this->request);
 		$controllerContext->setResponse($this->response);

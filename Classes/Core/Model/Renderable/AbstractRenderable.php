@@ -139,13 +139,13 @@ abstract class Tx_FormBase_Core_Model_Renderable_AbstractRenderable implements T
 			$implementationClassName = $validatorPresets[$validatorIdentifier]['implementationClassName'];
 			$defaultOptions = isset($validatorPresets[$validatorIdentifier]['options']) ? $validatorPresets[$validatorIdentifier]['options'] : array();
 
-			$options = Tx_Extbase_Utility_Arrays::arrayMergeRecursiveOverrule($defaultOptions, $options);
+			$options = Tx_FormBase_Utility_Arrays::arrayMergeRecursiveOverrule($defaultOptions, $options);
 
-			$validator = $this->objectManager->create('$implementationClassName',$options);
+			$validator = $this->objectManager->create($implementationClassName,$options);
 			$this->addValidator($validator);
 			return $validator;
 		} else {
-			throw $this->objectManager->create('Tx_FormBase_Exception_ValidatorPresetNotFoundException','The validator preset identified by "' . $validatorIdentifier . '" could not be found, or the implementationClassName was not specified.', 1328710202);
+			throw new Tx_FormBase_Exception_ValidatorPresetNotFoundException('The validator preset identified by "' . $validatorIdentifier . '" could not be found, or the implementationClassName was not specified.', 1328710202);
 		}
 
 	}

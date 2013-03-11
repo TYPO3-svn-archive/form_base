@@ -303,7 +303,7 @@ class Tx_FormBase_Tests_Unit_Core_Model_PageTest extends Tx_Extbase_Tests_Unit_B
 		$formDefinition = $this->getDummyFormDefinition();
 
 		$mockProcessingRule = $this->getAccessibleMock('Tx_FormBase_Core_Model_ProcessingRule', array('dummy'));
-		$mockProcessingRule->_set('validator', new Tx_Extbase_Validation_Validator_ConjunctionValidator());
+		$mockProcessingRule->_set('validator', new Tx_FormBase_Validation_ConjunctionValidator());
 		$formDefinition->expects($this->any())->method('getProcessingRule')->with('asdf')->will($this->returnValue($mockProcessingRule));
 
 		$page1 = $formDefinition->createPage('myPage1');

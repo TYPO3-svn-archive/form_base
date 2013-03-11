@@ -16,14 +16,6 @@
  * Note: a value of NULL or empty string ('') is considered valid
  */
 class Tx_FormBase_Validation_FileTypeValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
-					
-	/**
-	 * The Extbase object manager
-	 * 
-	 * @var Tx_Extbase_Object_ObjectManager
-	 * @inject
-	 */
-	protected $objectManager;
 
 	/**
 	 * The given $value is valid if it is an Tx_FormBase_Resource_Resource of the configured resolution
@@ -57,9 +49,9 @@ class Tx_FormBase_Validation_FileTypeValidator extends Tx_Extbase_Validation_Val
 	 */
 	protected function validateOptions() {
 		if (!isset($this->options['allowedExtensions'])) {
-			throw $this->objectManager->create('Tx_FormBase_Validation_Exception_InvalidValidationOptionsException','The option "allowedExtensions" was not specified.', 1327865682);
+			throw new Tx_FormBase_Validation_Exception_InvalidValidationOptionsException('The option "allowedExtensions" was not specified.', 1327865682);
 		} elseif (!is_array($this->options['allowedExtensions']) || $this->options['allowedExtensions'] === array()) {
-			throw $this->objectManager->create('Tx_FormBase_Validation_Exception_InvalidValidationOptionsException','The option "allowedExtensions" must be an array with at least one item.', 1328032876);
+			throw new Tx_FormBase_Validation_Exception_InvalidValidationOptionsException('The option "allowedExtensions" must be an array with at least one item.', 1328032876);
 		}
 	}
 }

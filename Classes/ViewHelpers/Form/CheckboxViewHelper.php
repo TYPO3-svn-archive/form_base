@@ -43,6 +43,50 @@ class Tx_FormBase_ViewHelpers_Form_CheckboxViewHelper extends Tx_Fluid_ViewHelpe
 			return FALSE;
 		return $propertyValue;
 	}
+	
+	/**
+	 * Renders the checkbox.
+	 *
+	 * @param boolean $checked Specifies that the input element should be preselected
+	 * @param boolean $multiple Specifies whether this checkbox belongs to a multivalue (is part of a checkbox group)
+	 *
+	 * @return string
+	 * @api
+	 */
+	public function render($checked = NULL, $multiple = NULL) {
+		$this->tag->addAttribute('type', 'checkbox');
+
+		$nameAttribute = $this->getName();
+		$valueAttribute = $this->getValue();
+		if ($this->isObjectAccessorMode()) {
+			$propertyValue = $this->getPropertyValue();
+			if ($propertyValue instanceof Traversable) {
+				$propertyValue = iterator_to_array($propertyValue);
+			}
+			if (is_array($propertyValue)) {
+				if ($checked === NULL) {
+					$checked = in_array($valueAttribute, $propertyValue);
+				}
+				$nameAttribute .= '[]';
+			} elseif ($multiple === TRUE) {
+				$nameAttribute .= '[]';
+			}elseif ($checked === NULL && $propertyValue !== NULL) {
+				$checked = (boolean)$propertyValue === (boolean)$valueAttribute;
+			}
+		}
+
+		$this->registerFieldNameForFormTokenGeneration($nameAttribute);
+		$this->tag->addAttribute('name', $nameAttribute);
+		$this->tag->addAttribute('value', $valueAttribute);
+		if ($checked) {
+			$this->tag->addAttribute('checked', 'checked');
+		}
+
+		$this->setErrorClassAttribute();
+
+		$this->renderHiddenFieldForEmptyValue();
+		return $this->tag->render();
+	}
 
 }
 

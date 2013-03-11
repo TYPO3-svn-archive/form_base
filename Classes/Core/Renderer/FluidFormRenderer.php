@@ -178,7 +178,6 @@ class Tx_FormBase_Core_Renderer_FluidFormRenderer extends Tx_Fluid_View_Template
 			$this->stopRendering();
 		} else {
 			$this->startRendering(self::RENDERING_TEMPLATE, $parsedRenderable, $renderingContext);
-			Tx_Extbase_Utility_Debugger::var_dump($parsedRenderable);
 			$output = $parsedRenderable->render($renderingContext);
 			$this->stopRendering();
 		}
@@ -226,12 +225,13 @@ class Tx_FormBase_Core_Renderer_FluidFormRenderer extends Tx_Fluid_View_Template
 		if (!isset($renderingOptions['layoutPathPattern'])) {
 			throw new Tx_FormBase_Exception_RenderingException(sprintf('The Renderable "%s" did not have the rendering option "layoutPathPattern" defined.', $renderableType), 1326094161);
 		}
-		list($packageKey, $shortRenderableType) = explode(':', $renderableType);
-
-		return strtr($renderingOptions['layoutPathPattern'], array(
-			'{@package}' => $packageKey,
-			'{@type}' => $shortRenderableType
-		));
+		return strtr(
+			$renderingOptions['layoutPathPattern'],
+			array(
+				'EXT:' => 'typo3conf/ext/',
+				'{@type}' => $renderableType
+			)
+		);
 	}
 
 	/**
@@ -248,16 +248,17 @@ class Tx_FormBase_Core_Renderer_FluidFormRenderer extends Tx_Fluid_View_Template
 		if (!isset($renderingOptions['partialPathPattern'])) {
 			throw new Tx_FormBase_Exception_RenderingException(sprintf('The Renderable "%s" did not have the rendering option "partialPathPattern" defined.', $renderableType), 1326713352);
 		}
-		list($packageKey, $shortRenderableType) = explode(':', $renderableType);
-
-		$partialPath = strtr($renderingOptions['partialPathPattern'], array(
-			'{@package}' => $packageKey,
-			'{@type}' => $shortRenderableType
-		));
+		$partialPath = strtr(
+			$renderingOptions['partialPathPattern'],
+			array(
+				'EXT:' => 'typo3conf/ext/',
+				'{@type}' => $renderableType
+			)
+		);
 		if (file_exists($partialPath)) {
 			return $partialPath;
 		}
-		throw $this->objectManager->create('Tx_Fluid_View_Exception_InvalidTemplateResourceException','The template file "' . $partialPath . '" could not be loaded.', 1326713418);
+		throw new Tx_Fluid_View_Exception_InvalidTemplateResourceException('The template file "' . $partialPath . '" could not be loaded.', 1326713418);
 	}
 
 	/**

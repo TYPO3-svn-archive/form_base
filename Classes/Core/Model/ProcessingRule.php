@@ -41,7 +41,7 @@ class Tx_FormBase_Core_Model_ProcessingRule {
 
 	/**
 	 * @inject
-	 * @var Tx_Extbase_Validation_Validator_ConjunctionValidator
+	 * @var Tx_FormBase_Validation_ConjunctionValidator
 	 */
 	protected $validator;
 

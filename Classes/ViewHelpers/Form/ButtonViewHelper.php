@@ -16,14 +16,14 @@
  * = Examples =
  *
  * <code title="Defaults">
- * <f:form.button>Send Mail</f:form.button>
+ * <form:form.button>Send Mail</form:form.button>
  * </code>
  * <output>
  * <button type="submit" name="" value="">Send Mail</button>
  * </output>
  *
  * <code title="Disabled cancel button with some HTML5 attributes">
- * <f:form.button type="reset" name="buttonName" value="buttonValue" disabled="disabled" formmethod="post" formnovalidate="formnovalidate">Cancel</f:form.button>
+ * <form:form.button type="reset" name="buttonName" value="buttonValue" disabled="disabled" formmethod="post" formnovalidate="formnovalidate">Cancel</form:form.button>
  * </code>
  * <output>
  * <button disabled="disabled" formmethod="post" formnovalidate="formnovalidate" type="reset" name="myForm[buttonName]" value="buttonValue">Cancel</button>

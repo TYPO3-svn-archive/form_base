@@ -30,14 +30,6 @@
  * you can just use the {@link Tx_FormBase_FormElements_GenericFormElement} and replace some templates.
  */
 abstract class Tx_FormBase_Core_Model_AbstractFormElement extends Tx_FormBase_Core_Model_Renderable_AbstractRenderable implements Tx_FormBase_Core_Model_FormElementInterface {
-					
-	/**
-	 * The Extbase object manager
-	 * 
-	 * @var Tx_Extbase_Object_ObjectManager
-	 * @inject
-	 */
-	protected $objectManager;
 
 	/**
 	 * @var mixed
@@ -58,7 +50,7 @@ abstract class Tx_FormBase_Core_Model_AbstractFormElement extends Tx_FormBase_Co
 	 */
 	public function __construct($identifier, $type) {
 		if (!is_string($identifier) || strlen($identifier) === 0) {
-			throw $this->objectManager->create('Tx_FormBase_Exception_IdentifierNotValidException','The given identifier was not a string or the string was empty.', 1325574803);
+			throw new Tx_FormBase_Exception_IdentifierNotValidException('The given identifier was not a string or the string was empty.', 1325574803);
 		}
 		if (preg_match(Tx_FormBase_Core_Model_FormElementInterface::PATTERN_IDENTIFIER, $identifier) !== 1) {
 			throw new Tx_FormBase_Exception_IdentifierNotValidException(sprintf('The given identifier "%s" is not valid. It has to be lowerCamelCased.', $identifier), 1329131480);

@@ -42,7 +42,9 @@ class Tx_FormBase_ViewHelpers_FormViewHelper extends Tx_Fluid_ViewHelpers_FormVi
 		$tagBuilder->addAttribute('name', $this->prefixFieldName('__state'));
 		$serializedFormState = base64_encode(serialize($this->arguments['object']->getFormState()));
 		$tagBuilder->addAttribute('value', $this->hashService->appendHmac($serializedFormState));
-		return $tagBuilder->render();
+		$result = $tagBuilder->render().chr(10);
+		$result .= '<input type="hidden" name="' . $this->prefixFieldName('formIdentifier') . '" value="' . $this->viewHelperVariableContainer->get('Tx_Fluid_ViewHelpers_FormViewHelper', 'formObject')->getIdentifier() . '" />' . chr(10);
+		return $result;
 	}
 
 	/**
@@ -53,7 +55,7 @@ class Tx_FormBase_ViewHelpers_FormViewHelper extends Tx_Fluid_ViewHelpers_FormVi
 	 * @return string
 	 */
 	protected function getFormObjectName() {
-		return $this->renderingContext->getTemplateVariableContainer()->get('form')->getIdentifier();;
+		return '';
 	}
 }
 

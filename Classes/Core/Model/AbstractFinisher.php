@@ -86,10 +86,23 @@ abstract class Tx_FormBase_Core_Model_AbstractFinisher implements Tx_FormBase_Co
 		} else {
 			$option = $this->options[$optionName];
 		}
+		$formRuntime = $this->finisherContext->getFormRuntime();
 		if (!is_string($option)) {
+			if (is_array($option)) {
+				$result = array();
+				foreach ($option as $key => $value) {
+					$result[$key] = preg_replace_callback(
+						'/{([^}]+)}/',
+						function($match) use ($formRuntime) {
+							return Tx_Extbase_Reflection_ObjectAccess::getPropertyPath($formRuntime, $match[1]);
+						},
+						$value
+					);
+				}
+				return $result;
+			}
 			return $option;
 		}
-		$formRuntime = $this->finisherContext->getFormRuntime();
 		return preg_replace_callback('/{([^}]+)}/', function($match) use ($formRuntime) {
 			return Tx_Extbase_Reflection_ObjectAccess::getPropertyPath($formRuntime, $match[1]);
 		}, $option);

@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Form Base',
-	'description' => 'Backport of the FLOW3 Form API',
+	'description' => 'Backport of the TYPO3.Flow Form API',
 	'category' => 'plugin',
 	'author' => 'Bernhard Schmitt',
 	'author_email' => 'b.schmitt@core4.de',
@@ -20,14 +20,14 @@ $EM_CONF[$_EXTKEY] = array(
 	'shy' => '',
 	'priority' => '',
 	'module' => '',
-	'state' => 'alpha',
+	'state' => 'stable',
 	'internal' => '',
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'version' => '0.1.0',
+	'version' => '1.0.0',
 	'constraints' => array(
 		'depends' => array(
 			'extbase' => '4.7',

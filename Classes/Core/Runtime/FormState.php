@@ -73,7 +73,7 @@ class Tx_FormBase_Core_Runtime_FormState {
 	 * @return void
 	 */
 	public function setFormValue($propertyPath, $value) {
-		$this->formValues = Tx_Extbase_Utility_Arrays::setValueByPath($this->formValues, $propertyPath, $value);
+		$this->formValues = Tx_FormBase_Utility_Arrays::setValueByPath($this->formValues, $propertyPath, $value);
 	}
 
 	/**
@@ -81,7 +81,7 @@ class Tx_FormBase_Core_Runtime_FormState {
 	 * @return mixed
 	 */
 	public function getFormValue($propertyPath) {
-		return Tx_Extbase_Utility_Arrays::getValueByPath($this->formValues, $propertyPath);
+		return Tx_FormBase_Utility_Arrays::getValueByPath($this->formValues, $propertyPath);
 	}
 }
 ?>

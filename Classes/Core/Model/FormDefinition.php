@@ -214,7 +214,7 @@
  * ==========================
  *
  * In order to trigger *rendering* on a FormDefinition,
- * the current {@link Tx_Extbase_MVC_Request} needs to be bound to the FormDefinition,
+ * the current {@link Tx_Extbase_MVC_Web_Request} needs to be bound to the FormDefinition,
  * resulting in a {@link Tx_FormBase_Core_Runtime_FormRuntime} object which contains the *Runtime State* of the form
  * (such as the currently inserted values).
  *
@@ -460,14 +460,14 @@ class Tx_FormBase_Core_Model_FormDefinition extends Tx_FormBase_Core_Model_Rende
 			$implementationClassName = $this->finisherPresets[$finisherIdentifier]['implementationClassName'];
 			$defaultOptions = isset($this->finisherPresets[$finisherIdentifier]['options']) ? $this->finisherPresets[$finisherIdentifier]['options'] : array();
 
-			$options = Tx_Extbase_Utility_Arrays::arrayMergeRecursiveOverrule($defaultOptions, $options);
+			$options = Tx_FormBase_Utility_Arrays::arrayMergeRecursiveOverrule($defaultOptions, $options);
 
-			$finisher = new $implementationClassName;
+			$finisher = $this->objectManager->create($implementationClassName);
 			$finisher->setOptions($options);
 			$this->addFinisher($finisher);
 			return $finisher;
 		} else {
-			throw $this->objectManager->create('Tx_FormBase_Exception_FinisherPresetNotFoundException','The finisher preset identified by "' . $finisherIdentifier . '" could not be found, or the implementationClassName was not specified.', 1328709784);
+			throw new Tx_FormBase_Exception_FinisherPresetNotFoundException('The finisher preset identified by "' . $finisherIdentifier . '" could not be found, or the implementationClassName was not specified.', 1328709784);
 		}
 	}
 
@@ -558,15 +558,13 @@ class Tx_FormBase_Core_Model_FormDefinition extends Tx_FormBase_Core_Model_Rende
 	 * Bind the current request & response to this form instance, effectively creating
 	 * a new "instance" of the Form.
 	 *
-	 * @param Tx_Extbase_MVC_Request $request
-	 * @param Tx_Extbase_MVC_Response $response
+	 * @param Tx_Extbase_MVC_Web_Request $request
+	 * @param Tx_Extbase_MVC_Web_Response $response
 	 * @return Tx_FormBase_Core_Runtime_FormRuntime
 	 * @api
 	 */
-	public function bind(Tx_Extbase_MVC_Request $request, Tx_Extbase_MVC_Response $response) {
-		$runtime = $this->objectManager->create('Tx_FormBase_Core_Runtime_FormRuntime', $this, $request, $response);
-		$runtime->initializeObject();
-		return $runtime;
+	public function bind(Tx_Extbase_MVC_Web_Request $request, Tx_Extbase_MVC_Web_Response $response) {
+		return $this->objectManager->create('Tx_FormBase_Core_Runtime_FormRuntime',$this, $request, $response);
 	}
 
 	/**

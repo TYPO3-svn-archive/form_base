@@ -151,7 +151,7 @@ class Tx_FormBase_Tests_Unit_Core_Model_AbstractFormElementTest extends Tx_Extba
 	 */
 	protected function getFormDefinitionWithProcessingRule($formElementIdentifier) {
 		$mockProcessingRule = $this->getAccessibleMock('Tx_FormBase_Core_Model_ProcessingRule', array('dummy'));
-		$mockProcessingRule->_set('validator', new Tx_Extbase_Validation_Validator_ConjunctionValidator());
+		$mockProcessingRule->_set('validator', new Tx_FormBase_Validation_ConjunctionValidator());
 
 		$formDefinition = $this->getMock('Tx_FormBase_Core_Model_FormDefinition', array('getProcessingRule'), array('foo'));
 		$formDefinition->expects($this->any())->method('getProcessingRule')->with($formElementIdentifier)->will($this->returnValue($mockProcessingRule));

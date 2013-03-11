@@ -32,7 +32,7 @@ class Tx_FormBase_ViewHelpers_Form_DatePickerViewHelper extends Tx_Fluid_ViewHel
 	protected $tagName = 'input';
 
 	/**
-	 * @var Tx_FormBase_Property_PropertyMapper
+	 * @var Tx_Extbase_Property_PropertyMapper
 	 * @inject
 	 */
 	protected $propertyMapper;
@@ -90,7 +90,7 @@ class Tx_FormBase_ViewHelpers_Form_DatePickerViewHelper extends Tx_Fluid_ViewHel
 			$content .= '<script type="text/javascript">//<![CDATA[
 				$(function() {
 					$("#' . $id . '").datepicker({
-						dateFormat: "' . $datePickerDateFormat . '",
+						dateFormat: "' . $datePickerDateFormat . '"
 					});
 				});
 				//]]></script>';

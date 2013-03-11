@@ -34,7 +34,7 @@ class Tx_FormBase_Tests_Unit_Core_Runtime_FormRuntimeTest extends Tx_Extbase_Tes
 
 		$httpRequest = Tx_FormBase_Http_Request::create(new Tx_FormBase_Http_Uri('foo'));
 		$request = $httpRequest->createActionRequest();
-		$response = $this->objectManager->create('Tx_Extbase_MVC_Response');
+		$response = $this->objectManager->create('Tx_Extbase_MVC_Web_Response');
 
 		$formRuntime = $this->createFormRuntime($formDefinition, $request, $response);
 
@@ -194,17 +194,17 @@ class Tx_FormBase_Tests_Unit_Core_Runtime_FormRuntimeTest extends Tx_Extbase_Tes
 
 	/**
 	 * @param Tx_FormBase_Core_Model_FormDefinition $formDefinition
-	 * @param Tx_Extbase_MVC_Request $request
-	 * @param Tx_Extbase_MVC_Response $response
+	 * @param Tx_Extbase_MVC_Web_Request $request
+	 * @param Tx_Extbase_MVC_Web_Response $response
 	 * @return Tx_FormBase_Core_Runtime_FormRuntime
 	 */
-	protected function createFormRuntime(Tx_FormBase_Core_Model_FormDefinition $formDefinition, Tx_Extbase_MVC_Request $request = NULL, Tx_Extbase_MVC_Response $response = NULL) {
+	protected function createFormRuntime(Tx_FormBase_Core_Model_FormDefinition $formDefinition, Tx_Extbase_MVC_Web_Request $request = NULL, Tx_Extbase_MVC_Web_Response $response = NULL) {
 		if ($request === NULL) {
 			$httpRequest = Tx_FormBase_Http_Request::create(new Tx_FormBase_Http_Uri('foo'));
 			$request = $httpRequest->createActionRequest();
 		}
 		if ($response === NULL) {
-			$response = $this->objectManager->create('Tx_Extbase_MVC_Response');
+			$response = $this->objectManager->create('Tx_Extbase_MVC_Web_Response');
 		}
 		return $this->getAccessibleMock('Tx_FormBase_Core_Runtime_FormRuntime', array('dummy'), array($formDefinition, $request, $response));
 	}

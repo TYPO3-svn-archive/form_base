@@ -1,5 +1,5 @@
-{namespace form=TYPO3\Form\ViewHelpers}
-<f:layout name="TYPO3.Form:Field" />
+{namespace form=Tx_FormBase_ViewHelpers}
+<f:layout name="Field" />
 <f:section name="field">
 	<form:form.datePicker id="{element.uniqueIdentifier}" property="{element.identifier}" placeholder="{element.properties.placeholder}" dateFormat="{element.properties.dateFormat}" initialDate="{element.properties.initialDate}" enableDatePicker="{element.properties.enableDatePicker}" class="small" errorClass="error" />
 	<f:if condition="{element.properties.displayTimeSelector}">

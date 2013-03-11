@@ -140,7 +140,7 @@ abstract class Tx_FormBase_Factory_AbstractFormFactory implements Tx_FormBase_Fa
 		if (isset($preset['parentPreset'])) {
 			$parentPreset = $this->getPresetConfiguration($preset['parentPreset']);
 			unset($preset['parentPreset']);
-			$preset = Tx_Extbase_Utility_Arrays::arrayMergeRecursiveOverrule($parentPreset, $preset);
+			$preset = Tx_FormBase_Utility_Arrays::arrayMergeRecursiveOverrule($parentPreset, $preset);
 		}
 		return $preset;
 	}

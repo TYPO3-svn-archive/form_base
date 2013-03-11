@@ -39,7 +39,7 @@ class Tx_FormBase_Tests_Unit_Core_Model_ProcessingRuleTest extends Tx_Extbase_Te
 		$this->mockPropertyMapper = $this->getMockBuilder('Tx_FormBase_Property_PropertyMapper')->getMock();
 		$this->processingRule = $this->getAccessibleMock('Tx_FormBase_Core_Model_ProcessingRule', array('dummy'));
 		$this->processingRule->_set('propertyMapper', $this->mockPropertyMapper);
-		$this->processingRule->_set('validator', new Tx_Extbase_Validation_Validator_ConjunctionValidator());
+		$this->processingRule->_set('validator', new Tx_FormBase_Validation_ConjunctionValidator());
 		$this->processingRule->_set('processingMessages', new Tx_Extbase_Error_Result());
 	}
 

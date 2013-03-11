@@ -18,14 +18,6 @@
  * used for improving the internal code structure.
  */
 abstract class Tx_FormBase_Core_Model_Renderable_AbstractCompositeRenderable extends Tx_FormBase_Core_Model_Renderable_AbstractRenderable implements Tx_FormBase_Core_Model_Renderable_CompositeRenderableInterface {
-					
-	/**
-	 * The Extbase object manager
-	 * 
-	 * @var Tx_Extbase_Object_ObjectManager
-	 * @inject
-	 */
-	protected $objectManager;
 
 	/**
 	 * array of child renderables
@@ -66,7 +58,7 @@ abstract class Tx_FormBase_Core_Model_Renderable_AbstractCompositeRenderable ext
 	 */
 	protected function moveRenderableBefore(Tx_FormBase_Core_Model_Renderable_RenderableInterface $renderableToMove, Tx_FormBase_Core_Model_Renderable_RenderableInterface $referenceRenderable) {
 		if ($renderableToMove->getParentRenderable() !== $referenceRenderable->getParentRenderable() || $renderableToMove->getParentRenderable() !== $this) {
-			throw $this->objectManager->create('Tx_FormBase_Exception_FormDefinitionConsistencyException','Moved renderables need to be part of the same parent element.', 1326089744);
+			throw new Tx_FormBase_Exception_FormDefinitionConsistencyException('Moved renderables need to be part of the same parent element.', 1326089744);
 		}
 
 		$reorderedRenderables = array();
@@ -98,7 +90,7 @@ abstract class Tx_FormBase_Core_Model_Renderable_AbstractCompositeRenderable ext
 	 */
 	protected function moveRenderableAfter(Tx_FormBase_Core_Model_Renderable_RenderableInterface $renderableToMove, Tx_FormBase_Core_Model_Renderable_RenderableInterface $referenceRenderable) {
 		if ($renderableToMove->getParentRenderable() !== $referenceRenderable->getParentRenderable() || $renderableToMove->getParentRenderable() !== $this) {
-			throw $this->objectManager->create('Tx_FormBase_Exception_FormDefinitionConsistencyException','Moved renderables need to be part of the same parent element.', 1326089744);
+			throw new Tx_FormBase_Exception_FormDefinitionConsistencyException('Moved renderables need to be part of the same parent element.', 1326089744);
 		}
 
 		$reorderedRenderables = array();
@@ -142,7 +134,7 @@ abstract class Tx_FormBase_Core_Model_Renderable_AbstractCompositeRenderable ext
 	 */
 	protected function removeRenderable(Tx_FormBase_Core_Model_Renderable_RenderableInterface $renderableToRemove) {
 		if ($renderableToRemove->getParentRenderable() !== $this) {
-			throw $this->objectManager->create('Tx_FormBase_Exception_FormDefinitionConsistencyException','The renderable to be removed must be part of the calling parent renderable.', 1326090127);
+			throw new Tx_FormBase_Exception_FormDefinitionConsistencyException('The renderable to be removed must be part of the calling parent renderable.', 1326090127);
 		}
 
 		$updatedRenderables = array();
